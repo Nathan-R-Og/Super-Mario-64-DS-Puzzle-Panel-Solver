@@ -2,6 +2,7 @@ package com.tagadvance;
 
 import javax.swing.JCheckBox;
 
+@SuppressWarnings("serial")
 public class UpperPointCheck extends PointCheck {
 
 	protected static UpperPointCheck[][] table;

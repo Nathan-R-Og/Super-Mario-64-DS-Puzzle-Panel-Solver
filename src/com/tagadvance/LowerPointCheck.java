@@ -2,6 +2,7 @@ package com.tagadvance;
 
 import javax.swing.JCheckBox;
 
+@SuppressWarnings("serial")
 public class LowerPointCheck extends PointCheck {
 
 	protected static LowerPointCheck[][] table;
