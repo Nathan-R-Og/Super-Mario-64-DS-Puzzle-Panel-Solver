@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -20,17 +21,19 @@ public class GUI {
 	final IntegerTextField x = new IntegerTextField();
 	final IntegerTextField y = new IntegerTextField();
 	final JPanel upper = new JPanel();
+	final JPanel mid = new JPanel();
 	final JPanel lower = new JPanel();
 
 	final JButton lay = new JButton("Layout");
 	final IntegerTextField turns = new IntegerTextField();
 	final JButton run = new JButton("Run");
+	final JLabel l = new JLabel();
 
 	public GUI(String title) {
 		this.frame = new JFrame(title);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.cPane = frame.getContentPane();
-		cPane.setLayout(new GridLayout(3, 1));
+		cPane.setLayout(new GridLayout(4, 1));
 		JPanel co = new JPanel();
 		co.setLayout(new FlowLayout());
 		Dimension d = new Dimension(20, 20);
@@ -56,10 +59,13 @@ public class GUI {
 		co.add(turns);
 		co.add(run);
 		cPane.add(co);
+
 		upper.setBorder(LineBorder.createGrayLineBorder());
 		cPane.add(upper);
 		lower.setBorder(LineBorder.createBlackLineBorder());
 		cPane.add(lower);
+
+		cPane.add(l);
 		frame.setVisible(true);
 		refresh();
 	}
@@ -70,14 +76,16 @@ public class GUI {
 		Runnable run = new Runnable() {
 			public void run() {
 				try {
+					String text = "<html>run anew<br>";
 					int t = turns.getInt();
 					points = new Point[t];
 					rec(t);
 					reverse(points);
 					for (int i = 0; i < t; i++) {
-						System.out.println(
-								"(" + (points[i].getX() + 1) + "," + (points[i].getY() + 1) + ")");
+						text += "(x:" + (points[i].getX() + 1) + ",y:" + (points[i].getY() + 1) + ")<br>";
 					}
+					text += "</html";
+					l.setText(text);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 					// is thrown when max turn count is not set
@@ -144,7 +152,7 @@ public class GUI {
 	}
 
 	public static void main(String[] args) {
-		GUI gui = new GUI("Mario Hacks");
+		GUI gui = new GUI("Super Mario 64 DS Puzzle Panel Solver");
 	}
 
 	public static void rest(long time) {
